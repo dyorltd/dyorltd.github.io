@@ -1,8 +1,162 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>DYOR Ltd</title>
-</head>
-<body>
-</body>
+  <head>
+    <title>DYOR Ltd.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Knewave&family=Space+Grotesk&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        color: white;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      body {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 120s ease infinite;
+        height: 100vh;
+        padding: 2rem;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      header {
+        text-align: center;
+        color: white;
+      }
+      main {
+        text-align: center;
+        flex: 1;
+      }
+      footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+      }
+      h1 {
+        font-family: "Knewave", cursive;
+        font-size: 5rem;
+        margin-bottom: 0;
+        opacity: 0.5;
+        text-shadow: 0 0 0.4rem rgba(0,0,0,.1);
+      }
+      h2 {
+        font-family: "Knewave", cursive;
+        font-size: 2rem;
+        opacity: 0.9;
+        text-shadow: 0 0 0.4rem rgba(0,0,0,.1);
+      }
+      h3 {
+        font-family: "Knewave", cursive;
+        margin-top: 1rem;
+      }
+      p {
+        max-width: 80ch;
+        margin: 2rem auto;
+      }
+      a {
+        color: white;
+        font-weight: bold;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      ul > li {
+        margin: 1rem;
+      }
+      img {
+        height: 2rem
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>DYOR</h1>
+      <h2>Do Your Own Research Ltd.</h2>
+    </header>
+    <main>
+      <p>
+        Do Your Own Research Ltd provides web3 consultancy and development
+        services to blockchain protocols, products, and applications that are
+        looking to build best-in-class user experiences.
+      </p>
+      <p>
+        We specialise in React UIs on EVM compatible chains using tools such as
+        <a href="https://nextjs.org/">next.js</a>,
+        <a href="https://wagmi.sh/">wagmi.sh</a>,
+        <a href="https://rainbowkit.com">RainbowKit</a>, and
+        <a href="https://usedapp.io/">useDApp</a>.
+      </p>
+      <p>
+        <h3>- Projects -</h3>
+        <ul>
+          <li>
+              <a href="https://nftx.io">
+                <img src="nftx_on_black.svg" alt="NFTX"/>
+              </a>
+          </li>
+          <li>
+            <a href="https://floor.xyz">
+              <img src="floordao.jpeg" alt="FloorDAO"/>
+            </a>
+          </li>
+          <li>
+            <a href="https://testnet.sokel.fi">
+              <img src="sokel.svg" alt="Sokel"/>
+            </a>
+          </li>
+          <li>
+            <a href="https://treasure.lol">
+              <img src="treasure.png" alt="Treasure"/>
+            </a>
+          </li>
+        </ul>
+      </p>
+    </main>
+    <footer>
+      <span id="date"></span>
+      <a href="mailto:gm@dyor.biz">Get in touch</a>
+    </footer>
+    <script>
+      ((w, d) => {
+        const x = d.getElementById("date");
+        x.innerHTML = `© Copyright ${new Date().getFullYear()}`;
+        console.log('Hi there.');
+      })(window, document);
+    </script>
+  </body>
 </html>
