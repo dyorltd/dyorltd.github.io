@@ -5,180 +5,354 @@
     <title>DYOR - Do Your Own Research Ltd.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Do Your Own Research Ltd specialises in web3 consultancy and development"/>
+    <meta name="theme-color" content="#0b0b0a"/>
     <link rel="icon" href="favicon.png">
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Space+Grotesk" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&display=swap" rel="stylesheet">
     <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
+      :root {
+        --bg: #0b0b0a;
+        --fg: #e8e6df;
+        --dim: #6f6e68;
+        --green: #9fe1cb;
+        --green-mid: #4fae88;
+        --green-low: #2a6650;
       }
-      html {
-        color: white;
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { background: var(--bg); }
       body {
-        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-        background-size: 300% 300%;
-        animation: gradient 60s ease infinite;
+        margin: 0;
         min-height: 100vh;
-        padding: 2rem 1rem;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        font-family: "Space Grotesk", sans-serif;
+        padding: 2.5rem 1rem;
+        background: var(--bg);
+        color: var(--fg);
+        font: 15px/1.7 "JetBrains Mono", ui-monospace, Menlo, monospace;
+      }
+      main { max-width: 760px; margin: 0 auto; }
+      section { margin-bottom: 2.25rem; }
+      .cmd { color: var(--dim); margin: 0 0 .5rem; }
+      .cmd b { color: var(--green); font-weight: 400; }
+      .cmd span { color: var(--fg); }
+      p { margin: 0 0 .75rem; max-width: 64ch; }
+      .muted { color: var(--dim); }
+      a { color: var(--green); text-decoration: none; }
+      a:hover, a:focus-visible { color: #fff; text-decoration: underline; }
+      a:focus-visible { outline: 1px dashed var(--green); outline-offset: 4px; }
+
+      h1 { margin: 0 0 .75rem; font-size: 6rem; line-height: 1; font-weight: 800; color: var(--green); letter-spacing: .02em; }
+      h1 canvas { display: block; }
+      .tagline { color: var(--fg); margin-bottom: 1rem; }
+
+      .sr-only {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
       }
 
-      @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
+      .projects {
+        list-style: none; margin: 0; padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        border-top: 1px solid #1d1d1b; border-left: 1px solid #1d1d1b;
       }
+      .projects li { border-right: 1px solid #1d1d1b; border-bottom: 1px solid #1d1d1b; }
+      .projects .item {
+        display: flex; flex-direction: column; gap: .75rem;
+        height: 100%; padding: 1rem;
+        color: var(--fg); text-decoration: none;
+      }
+      .projects a.item:hover, .projects a.item:focus-visible { background: #121211; color: #fff; text-decoration: none; }
+      .projects .icon { height: 48px; display: flex; align-items: center; }
+      .projects .icon canvas { transition: transform .15s steps(3); }
+      .projects a.item:hover .icon canvas, .projects a.item:focus-visible .icon canvas { transform: translateY(-3px); }
+      .projects .icon img { max-height: 48px; max-width: 48px; }
+      .projects .name { font-size: 13px; }
+      .projects .name small { color: var(--dim); font-size: 12px; }
+      .projects a.item .name::after { content: " \2197"; color: var(--dim); }
+      .active .projects { grid-template-columns: 1fr; }
+      .active .icon { height: 64px; }
+      .active .icon img { max-height: 64px; max-width: 64px; }
 
-      header {
-        text-align: center;
-        color: white;
+      .pixelated img { position: absolute; opacity: 0; pointer-events: none; }
+      .icon canvas { display: block; image-rendering: pixelated; }
+
+      .cursor {
+        display: inline-block; width: .6em; height: 1.1em; margin-left: .15em;
+        vertical-align: -.2em; background: var(--green);
+        animation: blink 1.1s steps(1) infinite;
       }
-      main {
-        text-align: center;
-        flex: 1;
-      }
-      footer {
-        margin-top: auto;
-        display: flex;
-        justify-content: space-between;
-      }
-      h1 {
-        font-family: "Bungee Shade", sans-serif;
-        font-size: 5rem;
-        margin-bottom: 0;
-        opacity: 0.5;
-        text-shadow: 0 0 0.4rem rgba(0,0,0,.1);
-      }
-      h2 {
-        font-family: "Bungee Shade", sans-serif;
-        font-size: 2rem;
-        opacity: 0.9;
-        text-shadow: 0 0 0.4rem rgba(0,0,0,.1);
-      }
-      h3 {
-        font-family: "Bungee Shade", sans-serif;
-        margin-top: 4rem;
-      }
-      p {
-        max-width: 80ch;
-        margin: 2rem auto;
-      }
-      a {
-        color: white;
-        font-weight: bold;
-      }
-      a:hover {
-        text-decoration: none;
-      }
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      ul li {
-        margin: 1rem;
-      }
-      ul img {
-        height: 2.5rem
-      }
-      .active-projects img {
-        height: 4rem;
+      @keyframes blink { 50% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+      footer { max-width: 760px; margin: 3rem auto 0; color: var(--dim); font-size: 13px; }
+
+      @media (max-width: 520px) {
+        body { font-size: 14px; padding: 1.5rem 1rem; }
+        h1 { font-size: 4rem; }
+        .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>DYOR</h1>
-      <h2>Do Your Own Research Ltd.</h2>
-    </header>
     <main>
-      <p>
-        Do Your Own Research Ltd provides consultancy and development
-        services to crypto protocols, products, and applications that are
-        looking to build best-in-class user experiences.
-      </p>
-      <p>
-        We specialise in building applications on EVM compatible chains.
-      </p>
-      <p>
-        <h3>- Active Projects -</h3>
-        <ul class="active-projects">
+      <section>
+        <p class="cmd"><b>dyor@ltd</b>:~$ <span>cat about.txt</span></p>
+        <h1 id="wordmark">DYOR</h1>
+        <p class="tagline">Do Your Own Research Ltd.</p>
+        <p>
+          We provide consultancy and development services to crypto protocols,
+          products, and applications that are looking to build best-in-class
+          user experiences.
+        </p>
+        <p class="muted"># We specialise in building applications on EVM compatible chains.</p>
+      </section>
+
+      <section class="active">
+        <p class="cmd"><b>dyor@ltd</b>:~$ <span>ls ./projects/active</span></p>
+        <ul class="projects">
           <li>
-            <a href="https://slab.cash">
-              <img src="slab.svg" alt="Slab"/>
+            <a class="item" href="https://slab.cash">
+              <span class="icon"><img src="slab.svg" alt="" data-crop="0,0,.435,1"/></span>
+              <span class="name">slab <small>slab.cash</small></span>
             </a>
           </li>
         </ul>
-        <h3>- Past Projects -</h3>
-        <ul>
+      </section>
+
+      <section>
+        <p class="cmd"><b>dyor@ltd</b>:~$ <span>ls ./projects/past</span></p>
+        <ul class="projects">
           <li>
-            <a href="https://flaunch.gg">
-              <img src="flaunch.png" alt="flaunch"/>
+            <a class="item" href="https://flaunch.gg">
+              <span class="icon"><img src="flaunch.png" alt="" data-sprite="flaunch"/></span>
+              <span class="name">flaunch</span>
             </a>
           </li>
           <li>
-            <a href="https://sophon.xyz">
-              <img src="sophon.svg" alt="Sophon"/>
+            <a class="item" href="https://sophon.xyz">
+              <span class="icon"><img src="sophon.svg" alt="" data-sprite="sophon"/></span>
+              <span class="name">sophon</span>
             </a>
           </li>
           <li>
-            <a href="https://nftx.io">
-              <img src="nftx_on_black.svg" alt="NFTX"/>
+            <a class="item" href="https://nftx.io">
+              <span class="icon"><img src="nftx_on_black.svg" alt="" data-crop=".735,0,.265,1"/></span>
+              <span class="name">nftx</span>
             </a>
           </li>
           <li>
-            <a href="https://floor.xyz">
-              <img src="floordao.svg" alt="FloorDAO" style="height: 2rem"/>
+            <a class="item" href="https://floor.xyz">
+              <span class="icon"><img src="floordao.svg" alt="" data-crop="0,0,.13,1"/></span>
+              <span class="name">floordao</span>
             </a>
           </li>
           <li>
-            <img src="eden-logo-white.svg" alt="RPC SpeedTest by Eden"/>
+            <div class="item">
+              <span class="icon"><img src="eden-logo-white.svg" alt="" data-crop="0,0,.2,1"/></span>
+              <span class="name">rpc-speedtest <small>by eden</small></span>
+            </div>
           </li>
           <li>
-            <img src="sokel.svg" alt="Sokel"/>
+            <div class="item">
+              <span class="icon"><img src="sokel.svg" alt="" data-crop="0,0,.32,1"/></span>
+              <span class="name">sokel</span>
+            </div>
           </li>
           <li>
-            <img src="panda.svg" alt="MEVPanda"/>
+            <div class="item">
+              <span class="icon"><img src="panda.svg" alt="" data-crop="0,0,1,1"/></span>
+              <span class="name">mevpanda</span>
+            </div>
           </li>
           <li>
-            <a href="https://treasure.lol">
-              <img src="treasure.png" alt="Treasure"/>
+            <a class="item" href="https://treasure.lol">
+              <span class="icon"><img src="treasure.png" alt="" data-crop="0,0,.167,1"/></span>
+              <span class="name">treasure</span>
             </a>
           </li>
         </ul>
-      </p>
+      </section>
+
+      <section>
+        <p class="cmd"><b>dyor@ltd</b>:~$ <span>mail <a href="mailto:gm@dyor.ltd">gm@dyor.ltd</a></span><span class="cursor" aria-hidden="true"></span></p>
+      </section>
     </main>
-    <footer>
-      <span id="date"></span>
-      <a href="mailto:gm@dyor.ltd">Get in touch</a>
-    </footer>
+    <footer><span id="date"></span></footer>
+
     <script>
       ((w, d) => {
-        const x = d.getElementById("date");
-        x.innerHTML = `© Copyright ${new Date().getFullYear()}`;
+        d.getElementById("date").textContent = `© Copyright ${new Date().getFullYear()} Do Your Own Research Ltd.`;
         console.log('gm fellow console inspectooooor.');
+
+        const calm = w.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const GREENS = ["#2a6650", "#4fae88", "#9fe1cb"];
+
+        // Draw a grid of cells ({x, y, color}) as square pixels, revealed in random order.
+        const paint = (host, cells, cols, rows, dot, gap) => {
+          const dpr = w.devicePixelRatio || 1;
+          const cv = d.createElement("canvas");
+          cv.width = Math.round(cols * dot * dpr);
+          cv.height = Math.round(rows * dot * dpr);
+          cv.style.width = cols * dot + "px";
+          cv.style.height = rows * dot + "px";
+          cv.setAttribute("aria-hidden", "true");
+          const g = cv.getContext("2d");
+          g.scale(dpr, dpr);
+          host.appendChild(cv);
+          const draw = c => { g.fillStyle = c.color; g.fillRect(c.x * dot, c.y * dot, dot - gap, dot - gap); };
+          if (calm) return cells.forEach(draw);
+          const order = cells.slice().sort(() => Math.random() - 0.5);
+          const start = performance.now(), dur = 600;
+          let shown = 0;
+          const step = now => {
+            const target = Math.min(order.length, Math.ceil(order.length * (now - start) / dur));
+            for (; shown < target; shown++) draw(order[shown]);
+            if (shown < order.length) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        };
+
+        // Downsample (part of) a source onto a cols x rows grid and read the pixels back.
+        const grid = (src, sx, sy, sw, sh, cols, rows) => {
+          const c = d.createElement("canvas");
+          c.width = cols; c.height = rows;
+          const x = c.getContext("2d", { willReadFrequently: true });
+          x.imageSmoothingQuality = "high";
+          // Fit the crop inside the grid, centred, keeping its aspect ratio.
+          const s = Math.min(cols / sw, rows / sh);
+          const dw = sw * s, dh = sh * s;
+          x.drawImage(src, sx, sy, sw, sh, (cols - dw) / 2, (rows - dh) / 2, dw, dh);
+          return x.getImageData(0, 0, cols, rows).data;
+        };
+
+        // Logos: crop to the brand mark and redraw it as 16x16 pixel art in its own colours.
+        const N = 16;
+        const q = v => Math.min(255, Math.round(v / 32) * 32);   // posterise a little
+        // Hand-drawn sprites for marks that don't survive automatic downscaling.
+        const SPRITES = {
+          flaunch: {
+            colors: { o: "#c98aa6", w: "#f6dbe8", d: "#3a2340" },
+            rows: [
+              ".....oo..oo.....",
+              ".oo..ow..wo..oo.",
+              ".owo.ow..wo.owo.",
+              "..owoow..woowo..",
+              "...owdw..wdwo...",
+              "ooooddw..wddoooo",
+              "owwwwww..wwwwwwo",
+              "................",
+              "................",
+              "owwwwww..wwwwwwo",
+              "ooooddw..wddoooo",
+              "...owdw..wdwo...",
+              "..owoow..woowo..",
+              ".owo.ow..wo.owo.",
+              ".oo..ow..wo..oo.",
+              ".....oo..oo.....",
+            ],
+          },
+          sophon: {
+            colors: { w: "#f6fcf6" },
+            rows: [
+              ".......w.......",
+              ".......w.......",
+              "...wwwwwwwww...",
+              ".ww....w....ww.",
+              "w......w......w",
+              "w.wwwwwwwwwww.w",
+              "w......w......w",
+              ".ww....w....ww.",
+              "...wwwwwwwww...",
+              ".......w.......",
+              ".......w.......",
+            ],
+          },
+        };
+
+        d.querySelectorAll(".projects .icon img").forEach(img => {
+          const go = () => {
+            const box = img.parentElement;
+            const size = parseFloat(getComputedStyle(img).maxHeight);
+            const sprite = SPRITES[img.dataset.sprite];
+            if (sprite) {
+              const cells = [];
+              sprite.rows.forEach((row, y) => [...row].forEach((ch, x) => {
+                if (sprite.colors[ch]) cells.push({ x, y, color: sprite.colors[ch] });
+              }));
+              paint(box, cells, sprite.rows[0].length, sprite.rows.length, size / N, 0);
+              box.classList.add("pixelated");
+              return;
+            }
+            // Rasterise the whole logo first: cropping an SVG directly with drawImage is unreliable.
+            const nw = 1200, nh = Math.round(nw * img.naturalHeight / img.naturalWidth);
+            const full = d.createElement("canvas");
+            full.width = nw; full.height = nh;
+            full.getContext("2d").drawImage(img, 0, 0, nw, nh);
+            const [fx, fy, fw, fh] = (img.dataset.crop || "0,0,1,1").split(",").map(Number);
+            const thr = parseFloat(img.dataset.thr || "0.3");
+            // Each pixel takes the dominant colour of the opaque area it covers, and is
+            // drawn if enough of it is covered (so thin strokes survive better than plain downscaling).
+            const cx = fx * nw, cy = fy * nh, cw = fw * nw, ch = fh * nh;
+            const cell = Math.max(cw, ch) / N;
+            const ox = cx - (N * cell - cw) / 2, oy = cy - (N * cell - ch) / 2;
+            const data = full.getContext("2d").getImageData(0, 0, nw, nh).data;
+            const cells = [];
+            for (let gy = 0; gy < N; gy++) for (let gx = 0; gx < N; gx++) {
+              let n = 0, on = 0;
+              const votes = new Map();
+              for (let y = Math.floor(oy + gy * cell); y < oy + (gy + 1) * cell; y++) {
+                for (let x = Math.floor(ox + gx * cell); x < ox + (gx + 1) * cell; x++) {
+                  n++;
+                  if (x < cx || y < cy || x >= cx + cw || y >= cy + ch) continue;
+                  const k = (y * nw + x) * 4;
+                  if (data[k + 3] < 128) continue;
+                  on++;
+                  const key = `rgb(${q(data[k])},${q(data[k + 1])},${q(data[k + 2])})`;
+                  votes.set(key, (votes.get(key) || 0) + 1);
+                }
+              }
+              if (!n || on / n < thr) continue;
+              // Most common (posterised) colour wins: keeps edges crisp instead of muddy averages.
+              let color, best = 0;
+              votes.forEach((v, k) => { if (v > best) { best = v; color = k; } });
+              cells.push({ x: gx, y: gy, color });
+            }
+            paint(box, cells, N, N, size / N, 0);
+            box.classList.add("pixelated");
+          };
+          img.complete && img.naturalWidth ? go() : img.addEventListener("load", go, { once: true });
+        });
+
+        // Wordmark: draw the text, then turn it into green dot-matrix pixels.
+        const h1 = d.getElementById("wordmark");
+        d.fonts.load('800 100px "JetBrains Mono"').finally(() => {
+          const size = parseFloat(getComputedStyle(h1).fontSize);
+          const DOT = 3, k = 4;
+          const t = d.createElement("canvas");
+          const tx = t.getContext("2d");
+          const font = `800 ${size * k}px "JetBrains Mono", monospace`;
+          tx.font = font;
+          const m = tx.measureText("DYOR");
+          t.width = Math.ceil(m.width);
+          t.height = Math.ceil(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent);
+          tx.font = font; tx.fillStyle = "#fff";
+          tx.fillText("DYOR", 0, m.actualBoundingBoxAscent);
+          const cols = Math.round(t.width / k / DOT), rows = Math.round(t.height / k / DOT);
+          const px = grid(t, 0, 0, t.width, t.height, cols, rows);
+          const cells = [];
+          for (let i = 0; i < cols * rows; i++) {
+            const a = px[i * 4 + 3] / 255;
+            if (a < 0.4) continue;
+            cells.push({ x: i % cols, y: Math.floor(i / cols), color: GREENS[a > 0.85 ? 2 : a > 0.6 ? 1 : 0] });
+          }
+          const label = h1.textContent;
+          h1.textContent = "";
+          const sr = d.createElement("span");
+          sr.className = "sr-only"; sr.textContent = label;
+          h1.appendChild(sr);
+          paint(h1, cells, cols, rows, DOT, 0.6);
+        });
       })(window, document);
     </script>
   </body>
